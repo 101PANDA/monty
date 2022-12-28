@@ -1,6 +1,7 @@
 #ifndef __MONTY_H__
 #define __MONTY_H__
 
+#define UNUSED(x) (void)(x)
 #define _POSIX_C_SOURCE 200809L
 #include <stddef.h>
 #include <stdio.h>
@@ -27,7 +28,23 @@ typedef struct stack_s
 	struct stack_s *next;
 } stack_t;
 
-void push(stack_t **head, unsigned int number);
+/**
+ * struct instruction_s - opcode and its function
+ * @opcode: the opcode
+ * @f: function to handle the opcode
+ *
+ * Description: opcode and its function
+ * for stack, queues, LIFO, FIFO
+ */
+typedef struct instruction_s
+{
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
+} instruction_t;
+
+void pallf(stack_t **head, unsigned int number);
+void (*func_select(char *cmd))(stack_t **, unsigned int);
+void pushf(stack_t **head, unsigned int number);
 stack_t *malloc_me(void);
 
 #endif

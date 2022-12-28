@@ -1,14 +1,19 @@
 #include "monty.h"
 
-void push(stack_t **head, unsigned int number)
+/**
+ * push - pushes an element to the stack
+ * @head - the head of the stack
+ * @number - the element added to the stack
+ * Return: the head of the stack
+ */
+
+stack_t *pushf(stack_t *head, unsigned int number)
 {
 	if (*head == NULL)
 	{
-		*head = malloc(sizeof(dlistint_t));
-		if (*head == NULL)
-			return (NULL);
+		*head = malloc_me();
 
-		(*head)->n = nunber;
+		(*head)->n = number;
 		(*head)->prev = NULL;
 		(*head)->next = NULL;
 	}
@@ -17,9 +22,12 @@ void push(stack_t **head, unsigned int number)
 	{
 		stack_t *new = malloc(sizeof(stack_t));
 		if (new == NULL)
-			return(NULL);
+		{
+			dprintf(3, "Error: malloc failed");
+			exit(EXIT_FAILURE);
+		}
 
-		new-> = n;
+		new->n = number;
 		new->next = *head;
 		new->prev = NULL;
 		*head = new;
