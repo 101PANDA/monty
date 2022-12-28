@@ -28,5 +28,6 @@ typedef struct stack_s
 } stack_t;
 
 void push(stack_t **head, unsigned int number);
+stack_t *malloc_me(void);
 
 #endif
